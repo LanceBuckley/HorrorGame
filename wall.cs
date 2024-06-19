@@ -22,7 +22,7 @@ public partial class wall : StaticBody3D
     {
     }
 
-    private void OnInteract(ulong interactable)
+    private void OnInteract(ulong interactable, Vector3 heldPosition)
     {
         if (interactable != _wallArea.GetInstanceId()) return;
         // This searches InventoryItems to find an item matching the criteria of Item2(the string) being Key1

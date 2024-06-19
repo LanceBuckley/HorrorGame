@@ -5,6 +5,7 @@ public partial class options_menu : CanvasLayer
 
 	private Button _resume;
 	private Button _retry;
+	private inventory _inventory;
     public override void _Ready()
     {
 	    // We initialize the vBoxContainer up here so that it can be appropriately referenced below in the switch case
@@ -30,6 +31,7 @@ public partial class options_menu : CanvasLayer
 	    _retry = GetNode<Button>("Control/VBoxContainer/Retry");
 	    _resume.Connect("pressed", Callable.From(_OnResumePressed));
 	    _retry.Connect("pressed", Callable.From(_OnRetryPressed));
+	    _inventory = GetNode<inventory>("/root/Inventory");
     }
 
     public override void _Input(InputEvent @event)
@@ -69,6 +71,8 @@ public partial class options_menu : CanvasLayer
     private void _OnRetryPressed()
     {
 	    GetTree().Paused = false;
+	    // This stops duplicate items from being stored in the inventory when the game is restarted
+	    _inventory.InventoryItems.Clear();
 	    GetTree().ReloadCurrentScene();
     }
 

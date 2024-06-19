@@ -4,7 +4,7 @@ using System;
 public partial class globals : Node
 {
 	[Signal]
-	public delegate void InteractEventHandler(string type);
+	public delegate void InteractEventHandler(ulong itemId, Vector3 position);
 
 	[Signal]
 	public delegate void UseItemEventHandler(ulong itemId);
