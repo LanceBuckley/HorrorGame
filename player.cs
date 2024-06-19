@@ -1,0 +1,94 @@
+using Godot;
+using System;
+
+public partial class player : CharacterBody3D
+{
+	public const float Speed = 5.0f;
+	public const float JumpVelocity = 4.5f;
+	private camera_joint _springArm;
+	private CollisionShape3D _body;
+	private interact_ray _interactRay;
+	private CanvasLayer _interactWindow;
+	private globals _globals;
+	private ulong _touching;
+
+	// Get the gravity from the project settings to be synced with RigidBody nodes.
+	public float Gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
+	
+	
+	// Called when the node enters the scene tree for the first time.
+	public override void _Ready()
+	{
+		_springArm = GetNode<camera_joint>("/root/SceneManager/Player/CameraJoint");
+		_body = GetNode<CollisionShape3D>("/root/SceneManager/Player/CollisionShape3D");
+		_interactWindow = GetNode<CanvasLayer>("InteractWindow");
+		_interactRay = GetNode<interact_ray>("InteractRay");
+		_globals = GetNode<globals>("/root/Globals");
+		_interactRay.Connect(nameof(interact_ray.TouchingEventHandler), new Callable(this, nameof(OnTouch)));
+	}
+
+	public override void _PhysicsProcess(double delta)
+	{
+		
+		Vector3 velocity = Velocity;
+
+		// Add the gravity.
+		if (!IsOnFloor())
+			velocity.Y -= Gravity * (float)delta;
+
+		// Handle Jump.
+		if (Input.IsActionJustPressed("Jump") && IsOnFloor())
+			velocity.Y = JumpVelocity;
+
+		if (_interactWindow.Visible)
+		{
+			if (Input.IsActionJustPressed("Interact"))
+			{
+				_globals.EmitSignal(nameof(globals.InteractEventHandler), _touching);
+			}
+		}
+
+		// Get the input direction and handle the movement/deceleration.
+		Vector2 inputDir = Input.GetVector("Left", "Right", "Up", "Down");
+		Vector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
+		direction = direction.Rotated(Vector3.Up, _springArm.Rotation.Y).Normalized();
+		if (direction != Vector3.Zero)
+		{
+			velocity.X = direction.X * Speed;
+			velocity.Z = direction.Z * Speed;
+		}
+		else
+		{
+			velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
+			velocity.Z = Mathf.MoveToward(Velocity.Z, 0, Speed);
+		}
+
+		Velocity = velocity;
+		MoveAndSlide();
+
+		if (Velocity.Length() > 0.2)
+		{
+			var lookDirection = new Vector2(Velocity.Z, Velocity.X);
+			var angle = lookDirection.Angle();
+			_body.RotationDegrees = new Vector3(_body.RotationDegrees.X, angle, _body.RotationDegrees.Z);
+		}
+	}
+
+	public override void _Process(double delta)
+	{
+		_springArm.Position = Position;
+	}
+
+	private void OnTouch(string text, ulong interactable)
+	{
+		_touching = interactable;
+		if (text == "null")
+		{
+			_interactWindow.Visible = false;
+			return;
+		}
+		_interactWindow.Visible = true;
+		var label = _interactWindow.GetChild<Label>(0);
+		label.Text = text;
+	}
+}
