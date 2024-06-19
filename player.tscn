@@ -1,10 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://ydr8hdj3gma5"]
+[gd_scene load_steps=7 format=3 uid="uid://ydr8hdj3gma5"]
 
 [ext_resource type="Script" path="res://player.cs" id="1_6dogl"]
 [ext_resource type="Script" path="res://camera_joint.cs" id="2_iom3l"]
 [ext_resource type="PackedScene" uid="uid://b1moqir1w0yfi" path="res://interact_window.tscn" id="3_1xj4u"]
 [ext_resource type="Script" path="res://interact_ray.cs" id="4_oyq6e"]
-[ext_resource type="Script" path="res://held_item.cs" id="5_y26p2"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_khfam"]
 
@@ -38,6 +37,5 @@ collide_with_areas = true
 collide_with_bodies = false
 script = ExtResource("4_oyq6e")
 
-[node name="HeldItem" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.443418, 0.323925, -1.25163)
-script = ExtResource("5_y26p2")
+[node name="HeldItem" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.492957, -0.22489, -0.524759)

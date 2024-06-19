@@ -11,7 +11,7 @@ public partial class player : CharacterBody3D
 	private CanvasLayer _interactWindow;
 	private globals _globals;
 	private inventory _inventory;
-	private Area3D _heldItem;
+	private Node3D _heldItem;
 	private ulong _touching;
 
 	// Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -27,7 +27,7 @@ public partial class player : CharacterBody3D
 		_interactRay = GetNode<interact_ray>("InteractRay");
 		_globals = GetNode<globals>("/root/Globals");
 		_inventory = GetNode<inventory>("/root/Inventory");
-		_heldItem = GetNode<Area3D>("HeldItem");
+		_heldItem = GetNode<Node3D>("HeldItem");
 		_interactRay.Connect(nameof(interact_ray.TouchingEventHandler), new Callable(this, nameof(OnTouch)));
 	}
 
@@ -61,7 +61,7 @@ public partial class player : CharacterBody3D
 		{
 			if (Input.IsActionJustPressed("Interact"))
 			{
-				_globals.EmitSignal(nameof(globals.InteractEventHandler), _touching, _heldItem.GlobalPosition);
+				_globals.EmitSignal(nameof(globals.InteractEventHandler), _touching, _heldItem);
 			}
 		}
 

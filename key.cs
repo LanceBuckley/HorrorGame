@@ -23,16 +23,23 @@ public partial class key : StaticBody3D
 	{
 	}
 
-	private void OnInteract(ulong interactable, Vector3 heldPosition)
+	private void OnInteract(ulong interactable, Node3D heldItem)
 	{
 		if (interactable != _keyArea.GetInstanceId()) return;
-		Position = heldPosition;
 		_inventory.AddItem(interactable, "Key1");
+		ChangeParent(heldItem);
+		Position = Vector3.Zero;
 	}
 
 	private void OnUse(ulong itemId)
 	{
 		if (itemId != _keyArea.GetInstanceId()) return;
 		QueueFree();
+	}
+
+	private void ChangeParent(Node3D newParent)
+	{
+		GetParent().RemoveChild(this);
+		newParent.AddChild(this);
 	}
 }
