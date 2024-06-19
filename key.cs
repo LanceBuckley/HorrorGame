@@ -29,6 +29,7 @@ public partial class key : StaticBody3D
 		_inventory.AddItem(interactable, "Key1");
 		ChangeParent(heldItem);
 		Position = Vector3.Zero;
+		ProcessMode = ProcessModeEnum.Disabled;
 	}
 
 	private void OnUse(ulong itemId)
@@ -37,9 +38,10 @@ public partial class key : StaticBody3D
 		QueueFree();
 	}
 
-	private void ChangeParent(Node3D newParent)
+	private void ChangeParent(Node3D heldItem)
 	{
 		GetParent().RemoveChild(this);
+		var newParent = heldItem.GetChild(0);
 		newParent.AddChild(this);
 	}
 }
