@@ -23,6 +23,7 @@ public partial class interact_ray : RayCast3D
 		if (IsColliding())
 		{
 			GodotObject interactable = GetCollider();
+			if (interactable == null) return;
 			if (interactable.HasMethod("GetText"))
 			{
 				var interactText = interactable.Call("GetText");

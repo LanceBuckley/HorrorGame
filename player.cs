@@ -10,6 +10,7 @@ public partial class player : CharacterBody3D
 	private interact_ray _interactRay;
 	private CanvasLayer _interactWindow;
 	private globals _globals;
+	private inventory _inventory;
 	private ulong _touching;
 
 	// Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -24,6 +25,7 @@ public partial class player : CharacterBody3D
 		_interactWindow = GetNode<CanvasLayer>("InteractWindow");
 		_interactRay = GetNode<interact_ray>("InteractRay");
 		_globals = GetNode<globals>("/root/Globals");
+		_inventory = GetNode<inventory>("/root/Inventory");
 		_interactRay.Connect(nameof(interact_ray.TouchingEventHandler), new Callable(this, nameof(OnTouch)));
 	}
 
@@ -34,11 +36,24 @@ public partial class player : CharacterBody3D
 
 		// Add the gravity.
 		if (!IsOnFloor())
+		{
 			velocity.Y -= Gravity * (float)delta;
+		}
 
 		// Handle Jump.
 		if (Input.IsActionJustPressed("Jump") && IsOnFloor())
+		{
 			velocity.Y = JumpVelocity;
+		}
+
+		if (Input.IsActionJustPressed("Inventory"))
+		{
+			// Assuming _inventory.InventoryItems is a List<string>
+			foreach (var item in _inventory.InventoryItems)
+			{
+				GD.Print(item);
+			}
+		}
 
 		if (_interactWindow.Visible)
 		{

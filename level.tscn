@@ -1,17 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://dj213u0okm03w"]
+[gd_scene load_steps=6 format=3 uid="uid://dj213u0okm03w"]
 
 [ext_resource type="Script" path="res://level.cs" id="1_yayax"]
 [ext_resource type="PackedScene" uid="uid://b5cwme2sh15pf" path="res://key.tscn" id="2_wvbis"]
-[ext_resource type="Script" path="res://wall_area.cs" id="3_1e55x"]
+[ext_resource type="PackedScene" uid="uid://bcelteqgedpu3" path="res://wall.tscn" id="3_hon7y"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_dx472"]
 size = Vector3(100, 0.5, 100)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_avpsd"]
 size = Vector3(100, 0.5, 100)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_da84d"]
-size = Vector3(3.12231, 1.59131, 1)
 
 [node name="Level" type="Node3D"]
 script = ExtResource("1_yayax")
@@ -211,13 +208,8 @@ size = Vector3(0.229492, 1, 0.25293)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.9426, 2.55971, 43.3805)
 size = Vector3(1.35638, 0.104492, 1.2998)
 
-[node name="WallArea" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.1493, 0.662066, 39.97)
-script = ExtResource("3_1e55x")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WallArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.143433, 0.295654, 0)
-shape = SubResource("BoxShape3D_da84d")
-
 [node name="Key2" parent="." instance=ExtResource("2_wvbis")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.8818, 0.692627, 35.3689)
+
+[node name="Wall" parent="." instance=ExtResource("3_hon7y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.0048, 1.06259, 39.8924)
