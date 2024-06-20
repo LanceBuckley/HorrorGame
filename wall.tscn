@@ -17,6 +17,8 @@ size = Vector3(3, 1.6, 1)
 size = Vector3(3, 1.6, 1)
 
 [node name="Wall" type="StaticBody3D"]
+collision_layer = 3
+collision_mask = 4
 script = ExtResource("1_fal6y")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -26,6 +28,8 @@ mesh = SubResource("BoxMesh_dsb0p")
 shape = SubResource("BoxShape3D_m688c")
 
 [node name="WallArea" type="Area3D" parent="."]
+collision_layer = 3
+collision_mask = 4
 script = ExtResource("1_2jlii")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WallArea"]

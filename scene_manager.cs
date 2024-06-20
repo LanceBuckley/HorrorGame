@@ -7,10 +7,12 @@ public partial class scene_manager : Node
 	private PackedScene _levelScene = (PackedScene)ResourceLoader.Load("res://level.tscn");
 	private PackedScene _playerScene = (PackedScene)ResourceLoader.Load("res://player.tscn");
 	private main_menu _mainMenu;
+	private globals _globals;
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		_globals = GetNode<globals>("/root/Globals");
 		_mainMenu = GetNode<main_menu>("/root/SceneManager/MainMenu");
         
 		// Connect the signal from MainMenu to the method in this class
@@ -27,6 +29,7 @@ public partial class scene_manager : Node
 		var playerPosition = levelInstance.GetNode<Node3D>("PlayerPosition");
 		playerInstance.Position = playerPosition.Position;
 		AddChild(playerInstance);
+		_globals.EmitSignal(nameof(globals.PlayerAddedEventHandler), playerInstance.GetPath());
 		_mainMenu.QueueFree();
 	}
 

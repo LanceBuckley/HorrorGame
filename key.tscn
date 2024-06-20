@@ -17,6 +17,8 @@ size = Vector3(0.12, 0.01, 0.2)
 size = Vector3(0.265839, 0.0381813, 0.363647)
 
 [node name="Key" type="StaticBody3D"]
+collision_layer = 5
+collision_mask = 8
 script = ExtResource("1_a750s")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -26,6 +28,8 @@ mesh = SubResource("BoxMesh_4k4vb")
 shape = SubResource("BoxShape3D_gkut6")
 
 [node name="KeyArea" type="Area3D" parent="."]
+collision_layer = 5
+collision_mask = 8
 script = ExtResource("2_uyuuf")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="KeyArea"]

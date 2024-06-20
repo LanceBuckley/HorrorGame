@@ -12,6 +12,7 @@
 
 [node name="Player" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+collision_layer = 31
 script = ExtResource("1_6dogl")
 
 [node name="InteractWindow" parent="." instance=ExtResource("3_1xj4u")]
