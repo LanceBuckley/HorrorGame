@@ -9,6 +9,7 @@ public partial class enemy_area : Area3D
 	private Vector3 _directionToCollider;
 	[Signal]
 	public delegate void CollisionEventHandler(ulong colliderId, Vector3 colliderDirection);
+	[Signal]
 	public delegate void LeavingEventHandler(ulong colliderId);
 	
 	// Called when the node enters the scene tree for the first time.
@@ -34,7 +35,7 @@ public partial class enemy_area : Area3D
 		if (body != _player)
 		{
 			// We want to adjust the enemy velocity to avoid walls. If the area collides with a wall to its front/back(Z) then we move left or right(X) until we exit the wall and vice-versa
-			_directionToCollider = (body.GlobalTransform.Origin - _enemy.GlobalTransform.Origin).Normalized();
+			_directionToCollider = body.GlobalTransform.Origin - _enemy.GlobalTransform.Origin;
 			EmitSignal(nameof(CollisionEventHandler), body.GetInstanceId(), _directionToCollider);
 		}
 		else

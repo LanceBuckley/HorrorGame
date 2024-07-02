@@ -65,9 +65,11 @@ public partial class player : CharacterBody3D
 			}
 		}
 
-		// Get the input direction and handle the movement/deceleration.
+		// Get the input direction
 		Vector2 inputDir = Input.GetVector("Left", "Right", "Up", "Down");
+		// Alter the input direction by the current rotation of the player, converting it into a local value
 		Vector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
+		// Rotate the direction further around the Y-axis by the springArm's rotation, thereby making it align with the visual direction of the camera
 		direction = direction.Rotated(Vector3.Up, _springArm.Rotation.Y).Normalized();
 		if (direction != Vector3.Zero)
 		{
@@ -85,6 +87,7 @@ public partial class player : CharacterBody3D
 
 		if (Velocity.Length() > 0.2)
 		{
+			// Change the player's rotation to match direction changes above
 			var lookDirection = new Vector2(Velocity.Z, Velocity.X);
 			var angle = lookDirection.Angle();
 			_body.RotationDegrees = new Vector3(_body.RotationDegrees.X, angle, _body.RotationDegrees.Z);

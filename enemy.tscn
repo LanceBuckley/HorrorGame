@@ -12,7 +12,7 @@ material = SubResource("StandardMaterial3D_ovvce")
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_wg6wu"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_4jgcg"]
-radius = 1.37849
+radius = 1.0135
 
 [node name="Enemy" type="CharacterBody3D"]
 collision_layer = 21
