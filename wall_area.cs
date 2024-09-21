@@ -18,5 +18,7 @@ public partial class wall_area : Area3D
         return GetInstanceId();
     }
 
+    // This is just to check if the ssh key stuff worked
+
 
 }
