@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://bx67i55bt051f"]
+
+[ext_resource type="Script" path="res://new_enemy.cs" id="1_fuk7n"]
+[ext_resource type="Script" path="res://enemy_cone.cs" id="2_nxbyj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ovvce"]
+albedo_color = Color(0.721569, 0.309804, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_wpbns"]
+material = SubResource("StandardMaterial3D_ovvce")
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_uwny4"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_c3ray"]
+points = PackedVector3Array(1, 0, 0, 0.7, 0.7, 0, 0, 1, 0, -0.7, 0.7, 0, -1, 0, 0, -0.7, -0.7, 0, 0, -1, 0, 0.7, -0.7, 0, 0, 0, 4)
+
+[node name="NewEnemy" type="CharacterBody3D"]
+collision_layer = 21
+collision_mask = 2
+script = ExtResource("1_fuk7n")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_wpbns")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_uwny4")
+
+[node name="EnemyCone" type="Area3D" parent="."]
+transform = Transform3D(-2, 4.9323e-08, -2.97937e-07, 0, 1.97314, 0.326652, 3.01992e-07, 0.326652, -1.97314, 0, -0.930287, -0.0929459)
+collision_layer = 5
+collision_mask = 2
+script = ExtResource("2_nxbyj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyCone"]
+transform = Transform3D(1, 0, 0, 0, -0.972228, 0.23404, 0, -0.23404, -0.972228, 0, -0.302901, 4.11068)
+shape = SubResource("ConvexPolygonShape3D_c3ray")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[connection signal="body_entered" from="EnemyCone" to="." method="OnEnemyConeBodyEntered"]

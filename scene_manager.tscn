@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://bg503kmmobhqu"]
+
+[ext_resource type="Script" path="res://scene_manager.cs" id="1_5g2wi"]
+[ext_resource type="PackedScene" uid="uid://bc80ubsph3krj" path="res://menus/main_menu.tscn" id="2_orldp"]
+[ext_resource type="PackedScene" uid="uid://k2k0df5rvkwe" path="res://menus/options_menu.tscn" id="4_odpbg"]
+
+[node name="SceneManager" type="Node"]
+script = ExtResource("1_5g2wi")
+
+[node name="MainMenu" parent="." instance=ExtResource("2_orldp")]
+
+[node name="OptionsMenu" parent="." instance=ExtResource("4_odpbg")]
+visible = false

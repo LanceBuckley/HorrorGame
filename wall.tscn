@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://bcelteqgedpu3"]
+
+[ext_resource type="Script" path="res://wall_area.cs" id="1_2jlii"]
+[ext_resource type="Script" path="res://wall.cs" id="1_fal6y"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2mkq3"]
+albedo_color = Color(1, 0.345098, 0.219608, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_dsb0p"]
+material = SubResource("StandardMaterial3D_2mkq3")
+size = Vector3(3, 1.6, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_m688c"]
+size = Vector3(3, 1.6, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fyvvv"]
+size = Vector3(3, 1.6, 1)
+
+[node name="Wall" type="StaticBody3D"]
+collision_layer = 3
+collision_mask = 4
+script = ExtResource("1_fal6y")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_dsb0p")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_m688c")
+
+[node name="WallArea" type="Area3D" parent="."]
+collision_layer = 3
+collision_mask = 4
+script = ExtResource("1_2jlii")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WallArea"]
+shape = SubResource("BoxShape3D_fyvvv")

@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://b5cwme2sh15pf"]
+
+[ext_resource type="Script" path="res://key.cs" id="1_a750s"]
+[ext_resource type="Script" path="res://key_area.cs" id="2_uyuuf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f6maf"]
+albedo_color = Color(0.681047, 0.116813, 9.62615e-08, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4k4vb"]
+material = SubResource("StandardMaterial3D_f6maf")
+size = Vector3(0.12, 0.01, 0.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gkut6"]
+size = Vector3(0.12, 0.01, 0.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_injia"]
+size = Vector3(0.265839, 0.0381813, 0.363647)
+
+[node name="Key" type="StaticBody3D"]
+collision_layer = 5
+collision_mask = 8
+script = ExtResource("1_a750s")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_4k4vb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_gkut6")
+
+[node name="KeyArea" type="Area3D" parent="."]
+collision_layer = 5
+collision_mask = 8
+script = ExtResource("2_uyuuf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="KeyArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00282288, 0.00347328, -0.0289917)
+shape = SubResource("BoxShape3D_injia")

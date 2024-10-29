@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://b1moqir1w0yfi"]
+
+[node name="InteractWindow" type="CanvasLayer"]
+
+[node name="Label" type="Label" parent="."]
+offset_left = 556.0
+offset_top = 304.0
+offset_right = 614.0
+offset_bottom = 327.0
+text = "Pick Up"

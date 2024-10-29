@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://64uwp12vq28n"]
+
+[node name="Office" type="CSGCombiner3D"]
+use_collision = true
+collision_layer = 3
+collision_mask = 4
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.72974, 0.752527, -2.16324)
+size = Vector3(5.188, 2, 0.483)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.58465, 0.752527, -2.14824)
+size = Vector3(5.188, 2, 0.483)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2.60065, 0.752527, 0.29706)
+size = Vector3(5.188, 2, 0.483)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2.60065, 0.752527, 5.34356)
+size = Vector3(5.188, 2, 0.483)

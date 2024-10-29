@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8rb6riac8dny"]
+
+[ext_resource type="Script" path="res://held_item.cs" id="1_by7k6"]
+
+[node name="HeldItem" type="Node3D"]
+script = ExtResource("1_by7k6")
+
+[node name="ItemPosition" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.2, -0.1, -0.25)
